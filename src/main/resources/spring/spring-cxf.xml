@@ -18,7 +18,11 @@
         <property name="provider" ref="validationProvider" />
     </bean>
 
-    <jaxrs:server id="ItemController" address="/api">
+    <bean id="swagger2Feature" class="org.apache.cxf.jaxrs.swagger.Swagger2Feature">
+        <property name="basePath" value="/demo/api"/>
+    </bean>
+
+    <jaxrs:server id="applicationControllers" address="/api">
         <jaxrs:inInterceptors>
             <ref bean="validationInInterceptor" />
         </jaxrs:inInterceptors>
@@ -26,12 +30,16 @@
             <ref bean="validationOutInterceptor" />
         </jaxrs:outInterceptors>
         <jaxrs:serviceBeans>
+            <ref bean="serviceInformationController" />
             <ref bean="itemController" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider"/>
             <ref bean="customExceptionMapper"/>
         </jaxrs:providers>
+        <jaxrs:features>
+            <ref bean="swagger2Feature" />
+        </jaxrs:features>
     </jaxrs:server>
 
 </beans>

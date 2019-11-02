@@ -8,4 +8,5 @@
     <context:annotation-config/>
 
     <bean id="itemController" class="com.example.demo.one.controller.ItemController" lazy-init="true" />
+    <bean id="serviceInformationController" class="com.example.demo.one.controller.ServiceInformationController" lazy-init="true" />
 </beans>

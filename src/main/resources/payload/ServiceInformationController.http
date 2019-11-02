@@ -1,0 +1,6 @@
+### check that controller is working
+### expected result: It works!
+
+GET http://localhost:8080/demo/api/service-info
+
+###
