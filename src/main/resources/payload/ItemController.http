@@ -1,0 +1,39 @@
+### check that controller is working
+### expected result: It works!
+
+GET http://localhost:8080/demo/api/items
+
+### Save new item
+### expected result: 200
+
+POST http://localhost:8080/demo/api/items
+Content-Type: application/json
+
+{
+	"name": "Casio G-SHOCK DW-5600BBN-1E",
+	"link": "https://www.alltime.ru/watch/casio/DW-5600BBN-1E/248290/",
+	"priority": 3
+}
+
+### save new item
+### expected result: 400 (priority more than 3)
+
+POST http://localhost:8080/demo/api/items
+Content-Type: application/json
+
+{
+  "name": "Casio G-SHOCK DW-5600BBN-1E",
+  "link": "https://www.alltime.ru/watch/casio/DW-5600BBN-1E/248290/",
+  "priority": 5
+}
+
+### save new item
+### expected result: 400 (link is absent)
+
+POST http://localhost:8080/demo/api/items
+Content-Type: application/json
+
+{
+  "name": "Casio G-SHOCK DW-5600BBN-1E",
+  "priority": 5
+}

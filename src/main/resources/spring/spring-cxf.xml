@@ -1,0 +1,37 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+
+    <bean id="exceptionMapper" class="org.apache.cxf.jaxrs.validation.ValidationExceptionMapper"/>
+    <bean id="customExceptionMapper" class="com.example.demo.one.exception.CustomExceptionMapper" lazy-init="true" />
+
+    <bean id="validationProvider" class="org.apache.cxf.validation.BeanValidationProvider" />
+    <bean id="validationInInterceptor" class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor">
+        <property name="provider" ref="validationProvider" />
+    </bean>
+    <bean id="validationOutInterceptor" class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationOutInterceptor">
+        <property name="provider" ref="validationProvider" />
+    </bean>
+
+    <jaxrs:server id="ItemController" address="/api">
+        <jaxrs:inInterceptors>
+            <ref bean="validationInInterceptor" />
+        </jaxrs:inInterceptors>
+        <jaxrs:outInterceptors>
+            <ref bean="validationOutInterceptor" />
+        </jaxrs:outInterceptors>
+        <jaxrs:serviceBeans>
+            <ref bean="itemController" />
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref bean="jsonProvider"/>
+            <ref bean="customExceptionMapper"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+
+</beans>
