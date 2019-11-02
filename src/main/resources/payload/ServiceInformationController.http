@@ -3,4 +3,5 @@
 
 GET http://localhost:8080/demo/api/service-info
 
-###
+### find out uptime
+GET http://localhost:8080/demo/api/service-info/uptime
