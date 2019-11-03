@@ -1,2 +1,2 @@
 # demo-one
-jax-rs (apache cxf) and spring
+Spring & Apache CXF & Mybatis application 
